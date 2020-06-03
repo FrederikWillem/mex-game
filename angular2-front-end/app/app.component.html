@@ -1,0 +1,7 @@
+<body>
+  <div class="grid-container">
+    <app-game-view class="game-view" [myName]="myName"></app-game-view>
+    <app-lobby-view class="lobby-view" [myName]="myName"></app-lobby-view>
+  </div>
+  <app-setup (setupMyName)="setMyName($event)"></app-setup>
+</body>

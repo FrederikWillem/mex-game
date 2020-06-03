@@ -1,0 +1,1 @@
+export const MEX: number = 21;

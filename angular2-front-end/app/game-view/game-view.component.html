@@ -1,0 +1,127 @@
+<div class='game'>
+    <div class='playersbox'>
+        <label *ngFor="let player of gameService.players; let i = index">
+
+            <label *ngIf="i + 1 <= math.ceil(gameService.players.length/2)">
+
+                <div *ngIf="player==gameService.playersTurn; then PlayerOnTurnUpper else PlayerUpper"></div>
+                <ng-template #PlayerOnTurnUpper>
+                    <div class='players-turn-upper'>
+                        <span class="yourname" *ngIf="player == myName; else OthersName">{{player}}</span>
+                        <ng-template #OthersName>{{player}}</ng-template>
+                    </div>
+                </ng-template>
+                <ng-template #PlayerUpper>
+                    <div class='player-upper'>
+                        <span class="yourname" *ngIf="player == myName; else OthersName">{{player}}</span>
+                        <ng-template #OthersName>{{player}}</ng-template>
+                    </div>
+                </ng-template>
+
+            </label>
+
+        </label>
+    </div>
+
+    <div class='table'>
+        <h5>Passed value: {{gameService.passedValue | passedValue:gameService.advice}}</h5>
+
+        <div *ngIf="gameService.drawn; then ShowDices else ShowCup"></div>
+        <ng-template #ShowDices>
+            <div class="openarea">
+                <div [innerHTML]="gameService.rolledValue | dices | safeHtml"></div>
+                <span class='reroll' *ngIf="myName==gameService.playersTurn">
+                    <button (click)=this.controller.firstRollDices()>roll</button>
+                </span>
+            </div>
+        </ng-template>
+
+        <ng-template #ShowCup>
+            <div class="cup">
+
+                <span *ngIf="myName==gameService.playersTurn; else CoverCup">
+
+                    <span *ngIf="gameService.hasRolled; then Dices else Buttons"></span>
+                    <ng-template #Dices>
+                        <div [innerHTML]="gameService.rolledValue | dices | safeHtml"></div>
+                        <span class='reroll'><button *ngIf="gameService.mayRollAgain" (click)=this.controller.rollDices()>roll again</button></span>
+                    </ng-template>
+                    <ng-template #Buttons>
+                        <button (click)=this.controller.rollDices()>roll</button>
+                        <button (click)=this.controller.drawCup()>draw</button>
+                    </ng-template>
+
+                </span>
+                <ng-template #CoverCup>
+                    <h5 class="title">Mexen</h5>
+                </ng-template>
+
+            </div>
+        </ng-template>
+
+        <div *ngIf="myName==gameService.playersTurn; then onTurn else waitingOnOthers"></div>
+        <ng-template #onTurn>
+
+            <span *ngIf="gameService.drawn; else PassValueBox">
+                <h5>Roll to (re)start the game!</h5>
+                <div class="filler"></div>
+            </span>
+            <ng-template #PassValueBox>
+
+                <span *ngIf="gameService.hasToRoll; else canPassValue">
+                    <h5>Roll or draw...</h5>
+                    <div class="filler"></div>
+                </span>
+                <ng-template #canPassValue>
+                    Value :
+                    <input type='number' #passbox value="{{gameService.passedValue | successivePassedValue}}" (keyup.enter)="controller.passCup(passbox.value, advice.value)"/>
+                    <br>
+                    Advice:
+                    <input type='number' #advice value="{{gameService.advice | successiveAdvice:gameService.passedValue}}" (keyup.enter)="controller.passCup(passbox.value, advice.value)"/>
+                    <br>
+                    <button (click)="this.controller.passCup(passbox.value, advice.value)">pass</button>
+                </ng-template>
+
+            </ng-template>
+
+        </ng-template>
+        <ng-template #waitingOnOthers>
+            <label class="joinorexit">
+                <h5>Other player's turn...</h5>
+
+                <span *ngIf="gameService.players.indexOf(myName) == -1; then JoinButton else ExitButton"></span>
+                <ng-template #JoinButton>
+                    <button (click)=this.controller.joinGame()>Join game</button>
+                </ng-template>
+                <ng-template #ExitButton>
+                    <button (click)=this.controller.exitGame()>Exit game</button>
+                </ng-template>
+
+            </label>
+        </ng-template>
+    </div>
+
+    <div class='playersbox'>
+        <label *ngFor="let player of gameService.players; let i = index">
+
+            <label *ngIf="i + 1 > math.ceil(gameService.players.length/2)">
+
+                <div *ngIf="player==gameService.playersTurn; then PlayerOnTurnLower else PlayerLower"></div>
+                <ng-template #PlayerOnTurnLower>
+                    <div class='players-turn-lower'>
+                        <span class="yourname" *ngIf="player == myName; else OthersName">{{player}}</span>
+                        <ng-template #OthersName>{{player}}</ng-template>
+                    </div>
+                </ng-template>
+                <ng-template #PlayerLower>
+                    <div class='player-lower'>
+                        <span class="yourname" *ngIf="player == myName; else OthersName">{{player}}</span>
+                        <ng-template #OthersName>{{player}}</ng-template>
+                    </div>
+                </ng-template>
+
+            </label>
+
+        </label>
+    </div>
+</div>

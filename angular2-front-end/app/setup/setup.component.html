@@ -1,0 +1,23 @@
+<div class="overlay" *ngIf="!setupService.nameSet">
+    <div class="text">
+        Welcome to Mexen! <br><br>
+        Please give your name/alias. <br><br>
+        
+          <span *ngIf="setupService.checkingName; then Text else InputAndButton"></span>
+          <ng-template #Text>
+              <br><br>
+              Checking name...
+              <br><br>
+          </ng-template>
+          <ng-template #InputAndButton>
+            <label>Your name:
+                <input type="text" #myName (keyup.enter)="setupName(myName.value)" />
+            </label>
+            <br><br>
+            <button (click)="setupName(myName.value)">
+                ENTER
+            </button>
+        </ng-template>
+        
+    </div>
+</div>

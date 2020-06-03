@@ -1,0 +1,44 @@
+body {
+    margin: -8px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    background-image: url('../assets/background.jpg');
+}
+
+button {
+    border-radius: 5px;
+    background-color:  rgb(1, 82, 26, 0.3);
+    width: 200px;
+    font-size: 25px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+      'game     lobby';
+    grid-template-columns: auto 400px;
+    grid-gap: 20px;
+    padding: 5px;
+    border-radius: 20px;
+    height: 100%;
+}
+
+.lobby-view {
+    grid-area: lobby;
+    height: 100%;
+}
+
+.game-view {
+    grid-area: game;
+    height: 100%;
+}
+
+@media only screen and (max-width: 950px) {
+    .grid-container{
+        grid-template-areas:
+        'game'
+        'lobby';
+        grid-template-columns: auto;
+        padding: 5px;
+    }
+  }

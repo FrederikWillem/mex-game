@@ -1,0 +1,52 @@
+<div class='grid-container'>
+    <div class='usersbox'>
+        <div class='header'>Users in lobby:</div>
+        <label *ngFor="let user of lobbyService.users">
+
+            <span *ngIf="user.name==myName; then You else User"></span>
+            <ng-template #You>
+                <div class="you">{{user.name}}</div>
+            </ng-template>
+            <ng-template #User>
+                <div class="user">{{user.name}}</div>
+            </ng-template>
+
+        </label>
+    </div>
+
+    <div #messagebox class='messagebox'>
+        <div class='header'>Messages:</div>
+        <div *ngFor="let message of lobbyService.messages">
+
+            <div *ngIf="message.author=='server'; then ServerMessage else UserMessage"></div>
+            <ng-template #ServerMessage>
+                <div class='servermessage'>
+                    {{message.text}}
+                </div>
+            </ng-template>
+            <ng-template #UserMessage>
+
+                <span *ngIf="message.author==myName; then Yours else Users"></span>
+                <ng-template #Yours>
+                    <div class="yourmessage">
+                        <span class="yourtime">{{message.datetime}}</span>
+                        <span class="yourtext">{{message.text}}</span>
+                    </div>
+                </ng-template>
+                <ng-template #Users>
+                    <div class='message'>
+                        <span class='author'>{{message.author}}: </span>
+                        <span class='text'>{{message.text}}</span>
+                        <span class='time'>{{message.datetime}}</span>
+                    </div>
+                </ng-template>
+
+            </ng-template>
+
+        </div>
+    </div>
+
+    <input class='typebox' #message value="Hallo!" (keyup.enter)="controller.sendMessage(message.value); message.value=''"/>
+    
+    <button class='sendbutton' (click)="this.controller.sendMessage(message.value); message.value=''">Send</button>
+</div>
