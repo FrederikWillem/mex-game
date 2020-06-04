@@ -20,4 +20,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - the Game Service handles the data and data operations of the game.
 - the Lobby Service handles the data and data operations of the lobby.
 - the LobbyView Component and GameView Component setup the display of the Lobby and Game respectively.
-- the Setup Component is an overlay and only shows when the player's name is not yet given.
+- the Setup Component is an overlay and only shows when the name of the player is not yet given.
