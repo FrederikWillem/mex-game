@@ -9,7 +9,7 @@ This websocket server is based on felladrin's: https://github.com/felladrin/php-
 - startServer starts the server.
 - the controllers contain the actions that can be called by the clients.
 - the models contain the data and data operations.
-- the helpers contain parent and other classes needed in the models.
+- the helpers contain parent and other classes needed by the model classes.
 
 ## Angular2 front-end
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1. 
@@ -20,4 +20,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - the Game Service handles the data and data operations of the game.
 - the Lobby Service handles the data and data operations of the lobby.
 - the LobbyView Component and GameView Component setup the display of the Lobby and Game respectively.
-- the Setup Component is an overlay and only shows when the players name is not yet given.
+- the Setup Component is an overlay and only shows when the player's name is not yet given.
