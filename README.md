@@ -1,5 +1,5 @@
 # mex-game
- The code of a mex game application. The back-end consists of a websocket server in PHP code, and the front-end is build using Angular(2/TS). This project has a MVC sturcture.
+ The code of a mex game application. The back-end consists of a websocket server in PHP code, and the front-end is build using Angular(2/TS). This project has a MVC structure.
 
 ## PHP Websocket server back-end
 This websocket server is based on felladrin's: https://github.com/felladrin/php-websocket-server/tree/master/example/server
